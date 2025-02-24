@@ -1,0 +1,133 @@
+/* Genel Ayarlar */
+body {
+  font-family: 'Georgia', serif; /* Yazı tipi 'Georgia' olarak ayarlandı. */
+  margin: 0; /* Sayfa kenar boşlukları sıfırlandı. */
+  padding: 0; /* Sayfa iç boşlukları sıfırlandı. */
+  background-color: #1C2025; /* Arka plan rengi koyu gri olarak ayarlandı. */
+  color: #F5F5F5; /* Yazı rengi açık gri olarak ayarlandı. */
+  box-sizing: border-box; /* Tüm öğeler kutu modelini kullanacak. */
+  padding-bottom: 70px; /* Footer için alttan ekstra boşluk bırakıldı. */
+}
+
+/* Header */
+.header {
+  background-color: #343A40; /* Header arka planı koyu gri olarak ayarlandı. */
+  color: #FFD700; /* Yazı rengi altın sarısı olarak ayarlandı. */
+  text-align: center; /* Yazılar ortalandı. */
+  padding: 3rem; /* İçerik etrafında boşluk bırakıldı. */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Gölgelendirme eklendi. */
+}
+
+.header h1 {
+  font-size: 3rem; /* Başlık boyutu büyük. */
+  margin: 0; /* Kenar boşluğu sıfırlandı. */
+}
+
+.header p {
+  font-size: 1.2rem; /* Açıklama metni boyutu ayarlandı. */
+  margin-top: 1rem; /* Üstten biraz boşluk bırakıldı. */
+}
+
+/* Ana İçerik */
+.main-content {
+  display: flex; /* İçerikler yan yana dizildi. */
+  justify-content: space-between; /* Aralarındaki boşluk eşit dağıtıldı. */
+  padding: 3rem; /* İçerikler etrafında boşluk bırakıldı. */
+  flex-wrap: wrap; /* Ekran daraldığında içerikler alt alta gelir. */
+}
+
+.menu, .order {
+  width: 45%; /* Menü ve sipariş alanları ekranın %45'ini kaplar. */
+  background-color: #282C34; /* Arka plan koyu renk. */
+  padding: 2.5rem; /* İçerik etrafında boşluk. */
+  border-radius: 10px; /* Kenarlar yuvarlatıldı. */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Gölgelendirme eklendi. */
+  margin-bottom: 2rem; /* Alt boşluk bırakıldı. */
+}
+
+.menu-category h3 {
+  color: #FFD700; /* Başlık rengi altın sarısı. */
+  font-size: 2rem; /* Başlık boyutu büyük. */
+  margin-bottom: 1rem; /* Alt boşluk bırakıldı. */
+}
+
+/* Menü Elemanları */
+.menu-item {
+  display: flex; /* Elemanlar yatayda sıralandı. */
+  align-items: center; /* Dikeyde ortalandı. */
+  justify-content: space-between; /* Aralarındaki boşluk eşit dağıtıldı. */
+  margin-bottom: 2rem; /* Alt boşluk bırakıldı. */
+  background-color: #343A40; /* Kutu arka planı koyu renk. */
+  padding: 2rem; /* İçerik etrafında boşluk. */
+  border-radius: 10px; /* Kenarlar yuvarlatıldı. */
+}
+
+.menu-item img {
+  width: 200px; /* Görsel genişliği ayarlandı. */
+  height: 200px; /* Görsel yüksekliği ayarlandı. */
+  border-radius: 10px; /* Görsel kenarları yuvarlatıldı. */
+  margin: 0 2rem; /* Yanlardan boşluk bırakıldı. */
+}
+
+.menu-item div {
+  flex: 1; /* İçerik alanı esnek hale getirildi. */
+  margin-left: 5rem; /* Soldan boşluk bırakıldı. */
+}
+
+button {
+  background-color: #FFD700; /* Buton arka planı altın sarısı. */
+  color: #343A40; /* Yazı rengi koyu gri. */
+  border: none; /* Kenar çizgisi kaldırıldı. */
+  padding: 1rem 2rem; /* İçerik etrafında boşluk. */
+  border-radius: 8px; /* Kenarlar yuvarlatıldı. */
+  cursor: pointer; /* İşaretçi el simgesi olarak değişir. */
+  font-size: 1.2rem; /* Yazı boyutu ayarlandı. */
+  transition: background-color 0.3s ease; /* Arka plan rengi geçiş efekti. */
+}
+
+button:hover {
+  background-color: #FFA500; /* Üzerine gelince rengi turuncuya değişir. */
+}
+
+/* Siparişler ve Toplam */
+.total {
+  font-size: 1.5rem; /* Toplam yazısının boyutu. */
+  margin-top: 2rem; /* Üst boşluk bırakıldı. */
+  text-align: right; /* Yazılar sağa hizalandı. */
+}
+
+/* Footer */
+.footer {
+  text-align: center; /* Yazılar ortalandı. */
+  padding: 2rem; /* İçerik etrafında boşluk. */
+  background-color: #343A40; /* Arka plan koyu gri. */
+  color: #FFD700; /* Yazı rengi altın sarısı. */
+  position: fixed; /* Footer sayfanın altına sabitlendi. */
+  bottom: 0; /* Sayfanın en altına yerleşti. */
+  width: 100%; /* Genişliği tam sayfa. */
+}
+
+/* Viewport Ayarları */
+
+/* Orta boyutlu cihazlar */
+@media screen and (max-width: 768px) {
+  /* Header yazı boyutları küçültüldü. */
+  .header h1 {
+    font-size: 2.5rem;
+  }
+  .main-content {
+    flex-direction: column; /* İçerikler alt alta dizildi. */
+  }
+  .menu, .order {
+    width: 100%; /* Alanlar tam genişlik oldu. */
+  }
+}
+
+/* Küçük cihazlar */
+@media screen and (max-width: 480px) {
+  /* Yazı ve kutu boyutları daha da küçültüldü. */
+  button {
+    font-size: 1rem;
+    padding: 0.8rem 1.8rem;
+  }
+}
