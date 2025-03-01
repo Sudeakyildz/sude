@@ -1,64 +1,64 @@
-const express = require('express'); // Express framework'ü dahil edilir.
-const mysql = require('mysql2/promise'); // MySQL bağlantısı için mysql2 kütüphanesi kullanılır (Promise destekli).
-const path = require('path'); // Dosya yollarını işlemek için path modülü kullanılır.
-const app = express(); // Express uygulaması oluşturulur.
-const port = 3000; // Sunucu için kullanılacak port numarası tanımlanır.
+const express = require('express'); // Include the Express framework.
+const mysql = require('mysql2/promise'); // Use the mysql2 library for MySQL connection (Promise-based).
+const path = require('path'); // Use the path module to handle file paths.
+const app = express(); // Create an Express application.
+const port = 3000; // Define the port number for the server.
 
-// JSON verilerini almak için middleware
-app.use(express.json()); // Gelen isteklerde JSON verisini otomatik olarak ayrıştırır.
+// Middleware to parse JSON data
+app.use(express.json()); // Automatically parse JSON data from incoming requests.
 
-// Statik dosyaları sun
+// Serve static files
 app.use(express.static(path.join(__dirname, 'public'))); 
-// 'public' dizinindeki statik dosyaları sunar. Örneğin, CSS, JS veya HTML dosyaları buradan alınır.
+// Serve static files from the 'public' directory, such as CSS, JS, or HTML files.
 
-// MySQL bağlantısı için bağlantı havuzu oluşturulur
+// Create a connection pool for MySQL
 const pool = mysql.createPool({
-    host: 'localhost', // Veritabanı sunucusunun adresi.
-    port: 3306, // Veritabanı sunucusunun portu.
-    user: 'user', // Veritabanı kullanıcı adı.
-    password: 'password', // Veritabanı şifresi.
-    database: 'dbname', // Kullanılacak veritabanı adı.
-    waitForConnections: true, // Bağlantı havuzunda bekleme etkin.
-    connectionLimit: 10, // Maksimum bağlantı sayısı.
-    queueLimit: 0, // Kuyrukta bekleme sınırı (0 = sınırsız).
+    host: 'localhost', // Database server address.
+    port: 3306, // Database server port.
+    user: 'user', // Database username.
+    password: 'password', // Database password.
+    database: 'dbname', // Name of the database.
+    waitForConnections: true, // Enable waiting in the connection pool.
+    connectionLimit: 10, // Maximum number of connections.
+    queueLimit: 0, // Queue limit (0 = unlimited).
 });
 
-// API endpointleri
+// API endpoints
 
-// Veritabanından tüm verileri döndüren GET endpoint
+// GET endpoint to return all data from the database
 app.get('/api/data', async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM your_table'); 
-        // Veritabanından tüm veriler sorgulanır.
-        res.json(rows); // Sonuçlar JSON formatında istemciye gönderilir.
+        // Query all data from the database.
+        res.json(rows); // Send the results to the client in JSON format.
     } catch (err) {
-        console.error('GET isteği hatası:', err); // Hata konsola yazılır.
-        res.status(500).send('Sunucu hatası'); // Sunucu hatası mesajı döndürülür.
+        console.error('GET request error:', err); // Log the error to the console.
+        res.status(500).send('Server error'); // Return server error message.
     }
 });
 
-// Sipariş gönderme endpoint'i
+// Order submission endpoint
 app.post('/api/orders', async (req, res) => {
-    console.log('Gelen veri:', req.body); // Gelen veri konsola yazdırılır.
+    console.log('Incoming data:', req.body); // Log incoming data to the console.
 
-    const { orderItems, totalAmount } = req.body; // İstek gövdesinden sipariş bilgileri alınır.
+    const { orderItems, totalAmount } = req.body; // Extract order information from the request body.
 
     if (!orderItems || orderItems.length === 0 || !totalAmount) {
-        // Eğer sipariş verisi eksikse hata döndürülür.
-        return res.status(400).send('Geçersiz sipariş verisi');
+        // If order data is missing, return an error.
+        return res.status(400).send('Invalid order data');
     }
 
     try {
-        const connection = await pool.getConnection(); // Veritabanı bağlantısı alınır.
+        const connection = await pool.getConnection(); // Get a database connection.
 
-        // Sipariş toplamını 'orders' tablosuna kaydet
+        // Save the order total to the 'orders' table
         const [orderResult] = await connection.query(
             'INSERT INTO orders (totalAmount) VALUES (?)',
             [totalAmount]
         );
-        const orderId = orderResult.insertId; // Yeni eklenen siparişin ID'si alınır.
+        const orderId = orderResult.insertId; // Get the ID of the newly added order.
 
-        // Sipariş ürünlerini 'order_items' tablosuna kaydet
+        // Save order items to the 'order_items' table
         for (let item of orderItems) {
             const { itemName, quantity, totalPrice } = item;
             await connection.query(
@@ -67,25 +67,25 @@ app.post('/api/orders', async (req, res) => {
             );
         }
 
-        connection.release(); // Veritabanı bağlantısı serbest bırakılır.
+        connection.release(); // Release the database connection.
 
-        res.status(201).json({ message: 'Sipariş başarıyla kaydedildi!' }); 
-        // Başarı mesajı döndürülür.
+        res.status(201).json({ message: 'Order successfully saved!' }); 
+        // Return success message.
 
     } catch (err) {
-        console.error('POST isteği hatası:', err); // Hata konsola yazılır.
-        res.status(500).send('Sunucu hatası'); // Sunucu hatası mesajı döndürülür.
+        console.error('POST request error:', err); // Log the error to the console.
+        res.status(500).send('Server error'); // Return server error message.
     }
 });
 
-// Root endpoint: index.html dosyasını sunar
+// Root endpoint: Serve the index.html file
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html')); 
-    // 'public' dizinindeki 'index.html' dosyası istemciye gönderilir.
+    // Send the 'index.html' file from the 'public' directory to the client.
 });
 
-// Sunucu başlatma
-app.listen(port, '172.20.10.10'  , () => {
-    console.log(`Sunucu http://172.20.10.10:${port} adresinde çalışıyor`); 
-    // Sunucunun hangi adreste çalıştığı konsola yazılır.
+// Start the server
+app.listen(port, '172.20.10.10', () => {
+    console.log(`Server is running at http://172.20.10.10:${port}`); 
+    // Log the address where the server is running.
 });
