@@ -1,133 +1,132 @@
-/* Genel Ayarlar */
+/* General Settings */
 body {
-  font-family: 'Georgia', serif; /* Yazı tipi 'Georgia' olarak ayarlandı. */
-  margin: 0; /* Sayfa kenar boşlukları sıfırlandı. */
-  padding: 0; /* Sayfa iç boşlukları sıfırlandı. */
-  background-color: #1C2025; /* Arka plan rengi koyu gri olarak ayarlandı. */
-  color: #F5F5F5; /* Yazı rengi açık gri olarak ayarlandı. */
-  box-sizing: border-box; /* Tüm öğeler kutu modelini kullanacak. */
-  padding-bottom: 70px; /* Footer için alttan ekstra boşluk bırakıldı. */
+  font-family: 'Georgia', serif; /* Font set to 'Georgia'. */
+  margin: 0; /* Page margins set to zero. */
+  padding: 0; /* Page padding set to zero. */
+  background-color: #1C2025; /* Background color set to dark gray. */
+  color: #F5F5F5; /* Text color set to light gray. */
+  box-sizing: border-box; /* All elements use box model. */
+  padding-bottom: 70px; /* Extra space added at the bottom for footer. */
 }
 
 /* Header */
 .header {
-  background-color: #343A40; /* Header arka planı koyu gri olarak ayarlandı. */
-  color: #FFD700; /* Yazı rengi altın sarısı olarak ayarlandı. */
-  text-align: center; /* Yazılar ortalandı. */
-  padding: 3rem; /* İçerik etrafında boşluk bırakıldı. */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Gölgelendirme eklendi. */
+  background-color: #343A40; /* Header background set to dark gray. */
+  color: #FFD700; /* Text color set to gold. */
+  text-align: center; /* Text aligned to center. */
+  padding: 3rem; /* Padding added around the content. */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow effect added. */
 }
 
 .header h1 {
-  font-size: 3rem; /* Başlık boyutu büyük. */
-  margin: 0; /* Kenar boşluğu sıfırlandı. */
+  font-size: 3rem; /* Header title size set to large. */
+  margin: 0; /* Margin set to zero. */
 }
 
 .header p {
-  font-size: 1.2rem; /* Açıklama metni boyutu ayarlandı. */
-  margin-top: 1rem; /* Üstten biraz boşluk bırakıldı. */
+  font-size: 1.2rem; /* Description text size set. */
+  margin-top: 1rem; /* Top margin added. */
 }
 
-/* Ana İçerik */
+/* Main Content */
 .main-content {
-  display: flex; /* İçerikler yan yana dizildi. */
-  justify-content: space-between; /* Aralarındaki boşluk eşit dağıtıldı. */
-  padding: 3rem; /* İçerikler etrafında boşluk bırakıldı. */
-  flex-wrap: wrap; /* Ekran daraldığında içerikler alt alta gelir. */
+  display: flex; /* Items aligned horizontally. */
+  justify-content: space-between; /* Space evenly distributed between items. */
+  padding: 3rem; /* Padding added around content. */
+  flex-wrap: wrap; /* Items wrap to next line on smaller screens. */
 }
 
 .menu, .order {
-  width: 45%; /* Menü ve sipariş alanları ekranın %45'ini kaplar. */
-  background-color: #282C34; /* Arka plan koyu renk. */
-  padding: 2.5rem; /* İçerik etrafında boşluk. */
-  border-radius: 10px; /* Kenarlar yuvarlatıldı. */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Gölgelendirme eklendi. */
-  margin-bottom: 2rem; /* Alt boşluk bırakıldı. */
+  width: 45%; /* Menu and order areas cover 45% of the screen width. */
+  background-color: #282C34; /* Background set to dark color. */
+  padding: 2.5rem; /* Padding added around content. */
+  border-radius: 10px; /* Rounded corners added. */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Shadow effect added. */
+  margin-bottom: 2rem; /* Bottom margin added. */
 }
 
 .menu-category h3 {
-  color: #FFD700; /* Başlık rengi altın sarısı. */
-  font-size: 2rem; /* Başlık boyutu büyük. */
-  margin-bottom: 1rem; /* Alt boşluk bırakıldı. */
+  color: #FFD700; /* Title color set to gold. */
+  font-size: 2rem; /* Title size set to large. */
+  margin-bottom: 1rem; /* Bottom margin added. */
 }
 
-/* Menü Elemanları */
+/* Menu Items */
 .menu-item {
-  display: flex; /* Elemanlar yatayda sıralandı. */
-  align-items: center; /* Dikeyde ortalandı. */
-  justify-content: space-between; /* Aralarındaki boşluk eşit dağıtıldı. */
-  margin-bottom: 2rem; /* Alt boşluk bırakıldı. */
-  background-color: #343A40; /* Kutu arka planı koyu renk. */
-  padding: 2rem; /* İçerik etrafında boşluk. */
-  border-radius: 10px; /* Kenarlar yuvarlatıldı. */
+  display: flex; /* Items aligned horizontally. */
+  align-items: center; /* Vertically centered. */
+  justify-content: space-between; /* Space evenly distributed. */
+  margin-bottom: 2rem; /* Bottom margin added. */
+  background-color: #343A40; /* Box background set to dark color. */
+  padding: 2rem; /* Padding added around content. */
+  border-radius: 10px; /* Rounded corners added. */
 }
 
 .menu-item img {
-  width: 200px; /* Görsel genişliği ayarlandı. */
-  height: 200px; /* Görsel yüksekliği ayarlandı. */
-  border-radius: 10px; /* Görsel kenarları yuvarlatıldı. */
-  margin: 0 2rem; /* Yanlardan boşluk bırakıldı. */
+  width: 200px; /* Image width set. */
+  height: 200px; /* Image height set. */
+  border-radius: 10px; /* Rounded corners added to image. */
+  margin: 0 2rem; /* Horizontal margin added. */
 }
 
 .menu-item div {
-  flex: 1; /* İçerik alanı esnek hale getirildi. */
-  margin-left: 5rem; /* Soldan boşluk bırakıldı. */
+  flex: 1; /* Content area made flexible. */
+  margin-left: 5rem; /* Left margin added. */
 }
 
 button {
-  background-color: #FFD700; /* Buton arka planı altın sarısı. */
-  color: #343A40; /* Yazı rengi koyu gri. */
-  border: none; /* Kenar çizgisi kaldırıldı. */
-  padding: 1rem 2rem; /* İçerik etrafında boşluk. */
-  border-radius: 8px; /* Kenarlar yuvarlatıldı. */
-  cursor: pointer; /* İşaretçi el simgesi olarak değişir. */
-  font-size: 1.2rem; /* Yazı boyutu ayarlandı. */
-  transition: background-color 0.3s ease; /* Arka plan rengi geçiş efekti. */
+  background-color: #FFD700; /* Button background set to gold. */
+  color: #343A40; /* Text color set to dark gray. */
+  border: none; /* Border removed. */
+  padding: 1rem 2rem; /* Padding added around content. */
+  border-radius: 8px; /* Rounded corners added. */
+  cursor: pointer; /* Pointer changes to hand icon on hover. */
+  font-size: 1.2rem; /* Font size set. */
+  transition: background-color 0.3s ease; /* Smooth transition effect for background color. */
 }
 
 button:hover {
-  background-color: #FFA500; /* Üzerine gelince rengi turuncuya değişir. */
+  background-color: #FFA500; /* Button color changes to orange on hover. */
 }
 
-/* Siparişler ve Toplam */
+/* Order Summary and Total */
 .total {
-  font-size: 1.5rem; /* Toplam yazısının boyutu. */
-  margin-top: 2rem; /* Üst boşluk bırakıldı. */
-  text-align: right; /* Yazılar sağa hizalandı. */
+  font-size: 1.5rem; /* Total text size set. */
+  margin-top: 2rem; /* Top margin added. */
+  text-align: right; /* Text aligned to the right. */
 }
 
 /* Footer */
 .footer {
-  text-align: center; /* Yazılar ortalandı. */
-  padding: 2rem; /* İçerik etrafında boşluk. */
-  background-color: #343A40; /* Arka plan koyu gri. */
-  color: #FFD700; /* Yazı rengi altın sarısı. */
-  position: fixed; /* Footer sayfanın altına sabitlendi. */
-  bottom: 0; /* Sayfanın en altına yerleşti. */
-  width: 100%; /* Genişliği tam sayfa. */
+  text-align: center; /* Text aligned to center. */
+  padding: 2rem; /* Padding added around content. */
+  background-color: #343A40; /* Background set to dark gray. */
+  color: #FFD700; /* Text color set to gold. */
+  position: fixed; /* Footer fixed at the bottom. */
+  bottom: 0; /* Positioned at the bottom of the page. */
+  width: 100%; /* Full width applied. */
 }
 
-/* Viewport Ayarları */
+/* Viewport Settings */
 
-/* Orta boyutlu cihazlar */
+/* Medium-sized devices */
 @media screen and (max-width: 768px) {
-  /* Header yazı boyutları küçültüldü. */
   .header h1 {
-    font-size: 2.5rem;
+    font-size: 2.5rem; /* Header title size reduced. */
   }
   .main-content {
-    flex-direction: column; /* İçerikler alt alta dizildi. */
+    flex-direction: column; /* Items aligned vertically. */
   }
   .menu, .order {
-    width: 100%; /* Alanlar tam genişlik oldu. */
+    width: 100%; /* Full width applied. */
   }
 }
 
-/* Küçük cihazlar */
+/* Small devices */
 @media screen and (max-width: 480px) {
-  /* Yazı ve kutu boyutları daha da küçültüldü. */
   button {
-    font-size: 1rem;
-    padding: 0.8rem 1.8rem;
+    font-size: 1rem; /* Button text size reduced. */
+    padding: 0.8rem 1.8rem; /* Button padding reduced. */
   }
 }
+
