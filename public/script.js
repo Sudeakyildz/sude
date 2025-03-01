@@ -1,111 +1,111 @@
-let orders = {}; // Siparişler için bir nesne tanımlanır. Her ürünün adını anahtar olarak kullanır ve değer olarak fiyat ve miktar bilgilerini tutar.
+let orders = {}; // An object is defined for orders. It uses the product name as the key and holds price and quantity information as the value.
 
-// Siparişe ürün ekleyen fonksiyon
+// Function to add product to the order
 function addToOrder(item, price) {
     if (orders[item]) {
-        // Eğer ürün zaten siparişte varsa, miktarını bir artır
+        // If the product is already in the order, increase its quantity by one
         orders[item].quantity++;
     } else {
-        // Eğer ürün ilk defa ekleniyorsa, yeni bir giriş oluştur
+        // If the product is added for the first time, create a new entry
         orders[item] = { price, quantity: 1 };
     }
-    renderOrders(); // Sipariş listesini yeniden oluştur ve ekranda güncelle
+    renderOrders(); // Rebuild and update the order list on the screen
 }
 
-// Siparişleri ekranda görüntüleyen fonksiyon
+// Function to display orders on the screen
 function renderOrders() {
-    const orderList = document.getElementById('orderList'); // Siparişlerin listeleneceği HTML öğesi
-    const totalPriceSpan = document.getElementById('totalPrice'); // Toplam fiyatın gösterileceği HTML öğesi
-    let totalPrice = 0; // Toplam fiyatı hesaplamak için başlangıç değeri
+    const orderList = document.getElementById('orderList'); // HTML element where orders will be listed
+    const totalPriceSpan = document.getElementById('totalPrice'); // HTML element where the total price will be shown
+    let totalPrice = 0; // Initial value to calculate total price
 
-    orderList.innerHTML = ''; // Listeyi temizle
+    orderList.innerHTML = ''; // Clear the list
 
     for (let item in orders) {
-        // Siparişteki her ürün için döngü
-        const { price, quantity } = orders[item]; // Ürünün fiyat ve miktar bilgilerini al
-        totalPrice += price * quantity; // Toplam fiyatı güncelle
+        // Loop through each product in the order
+        const { price, quantity } = orders[item]; // Get the product's price and quantity information
+        totalPrice += price * quantity; // Update the total price
 
-        // Her ürün için bir liste öğesi oluştur
+        // Create a list item for each product
         const listItem = document.createElement('li');
         listItem.innerHTML = `
             ${item} - ${price}₺ x ${quantity}
-            <button onclick="updateOrder('${item}', -1)">-</button> <!-- Miktarı azalt -->
-            <button onclick="updateOrder('${item}', 1)">+</button> <!-- Miktarı artır -->
+            <button onclick="updateOrder('${item}', -1)">-</button> <!-- Decrease quantity -->
+            <button onclick="updateOrder('${item}', 1)">+</button> <!-- Increase quantity -->
         `;
-        orderList.appendChild(listItem); // Liste öğesini HTML'deki sipariş listesine ekle
+        orderList.appendChild(listItem); // Add the list item to the HTML order list
     }
 
     if (Object.keys(orders).length === 0) {
-        // Eğer sipariş boşsa, bilgilendirici bir mesaj göster
-        orderList.innerHTML = '<li>Siparişleriniz burada görünecek.</li>';
+        // If the order is empty, display an informative message
+        orderList.innerHTML = '<li>Your orders will appear here.</li>';
     }
 
-    totalPriceSpan.textContent = totalPrice; // Toplam fiyatı ekranda güncelle
+    totalPriceSpan.textContent = totalPrice; // Update the total price on the screen
 }
 
-// Sipariş miktarını güncelleyen fonksiyon
+// Function to update order quantity
 function updateOrder(item, change) {
     if (orders[item]) {
-        orders[item].quantity += change; // Ürünün miktarını verilen değişim değeri kadar artır veya azalt
+        orders[item].quantity += change; // Increase or decrease the product quantity by the given change value
         if (orders[item].quantity <= 0) {
-            // Eğer miktar sıfır veya daha azsa, ürünü siparişten kaldır
+            // If the quantity is zero or less, remove the product from the order
             delete orders[item];
         }
     }
-    renderOrders(); // Sipariş listesini yeniden oluştur ve güncelle
+    renderOrders(); // Rebuild and update the order list
 }
 
-// Sipariş listesini tamamen temizleyen fonksiyon
+// Function to clear the entire order list
 function clearOrder() {
-    orders = {}; // Siparişleri sıfırla
-    renderOrders(); // Sipariş listesini ekranda güncelle
+    orders = {}; // Reset the orders
+    renderOrders(); // Update the order list on the screen
 }
 
-// Siparişleri sunucuya gönderen fonksiyon
+// Function to send orders to the server
 function submitOrder() {
     if (Object.keys(orders).length === 0) {
-        // Eğer sipariş boşsa, uyarı göster
-        alert("Sipariş vermek için önce ürün ekleyin.");
+        // If the order is empty, show a warning
+        alert("Add products before placing an order.");
         return;
     }
 
-    // Gönderilecek sipariş verisini hazırla
+    // Prepare the order data to be sent
     const orderData = {
         orderItems: Object.keys(orders).map(item => ({
-            itemName: item, // Ürünün adı
-            quantity: orders[item].quantity, // Ürünün miktarı
-            totalPrice: orders[item].price * orders[item].quantity, // Ürünün toplam fiyatı
+            itemName: item, // Product name
+            quantity: orders[item].quantity, // Product quantity
+            totalPrice: orders[item].price * orders[item].quantity, // Product total price
         })),
         totalAmount: Object.values(orders).reduce(
             (sum, { price, quantity }) => sum + price * quantity,
-            0 // Başlangıç değeri 0
+            0 // Initial value 0
         ),
     };
 
-    console.log('Gönderilen sipariş verisi:', orderData); // Sipariş verisini konsola yazdır
+    console.log('Order data sent:', orderData); // Log the order data to the console
 
-    // Sipariş verisini sunucuya gönder
+    // Send the order data to the server
     fetch('http://172.20.10.10:3000/api/orders', {
-        method: 'POST', // HTTP POST metodu
+        method: 'POST', // HTTP POST method
         headers: { 
-            'Content-Type': 'application/json' // JSON formatında veri gönderileceğini belirt
+            'Content-Type': 'application/json' // Indicate that the data will be sent in JSON format
         },
-        body: JSON.stringify(orderData), // Sipariş verisini JSON formatına çevir ve gönder
+        body: JSON.stringify(orderData), // Convert order data to JSON format and send it
     })
     .then(response => {
         if (!response.ok) {
-            // Eğer sunucudan bir hata dönerse, hata mesajını al
+            // If the server returns an error, get the error message
             return response.text().then(text => { throw new Error(text); });
         }
-        return response.json(); // Sunucudan gelen yanıtı JSON olarak çöz
+        return response.json(); // Parse the server response as JSON
     })
     .then(data => {
-        console.log('Sipariş yanıtı:', data); // Sunucudan gelen yanıtı konsola yazdır
-        alert('Sipariş başarıyla kaydedildi!'); // Başarı mesajı göster
-        clearOrder(); // Sipariş listesini temizle
+        console.log('Order response:', data); // Log the server response to the console
+        alert('Order successfully submitted!'); // Show a success message
+        clearOrder(); // Clear the order list
     })
     .catch(error => {
-        console.error('Hata:', error); // Hata mesajını konsola yazdır
-        alert('Bir hata oluştu.'); // Kullanıcıya hata mesajı göster
+        console.error('Error:', error); // Log the error message to the console
+        alert('An error occurred.'); // Show an error message to the user
     });
 }
